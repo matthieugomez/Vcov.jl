@@ -15,8 +15,7 @@ function S_hat(x::RegressionModel, ::SimpleCovariance)
 end
 
 function StatsAPI.vcov(x::RegressionModel, ::SimpleCovariance)
-    invcrossmodelmatrix = Matrix(inv(crossmodelmatrix(x)))
-    rmul!(invcrossmodelmatrix, sum(abs2, residuals(x)) /  dof_residual(x))
-    Symmetric(invcrossmodelmatrix)
+    invXX = Symmetric(invcrossmodelmatrix(x))
+    invXX.data .= invXX.data .* (sum(abs2, residuals(x)) /  dof_residual(x))
 end
 
