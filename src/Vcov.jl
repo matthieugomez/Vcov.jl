@@ -21,6 +21,7 @@ struct VcovData{T, N} <: RegressionModel
 end
 StatsAPI.modelmatrix(x::VcovData) = x.modelmatrix
 StatsAPI.crossmodelmatrix(x::VcovData) = x.crossmodelmatrix
+StatsAPI.invcrossmodelmatrix(x::VcovData) = inv(x.crossmodelmatrix)
 StatsAPI.residuals(x::VcovData) = x.residuals
 StatsAPI.dof_residual(x::VcovData) = x.dof_residual
 
